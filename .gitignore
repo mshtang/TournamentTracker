@@ -1,3 +1,6 @@
 .vs
 TrackerUI/bin
 TrackerUI/obj
+TrackerLibrary/bin
+TrackerLibrary/obj
+TrackerLibrary/obj/
