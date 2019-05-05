@@ -14,7 +14,7 @@ namespace TrackerUI
 {
     public partial class CreateTeamForm : Form
     {
-        private List<PersonModel> availableMembers = new List<PersonModel>();
+        private List<PersonModel> availableMembers = GlobalConfig.Connection.GetPerson_ALL();
         private List<PersonModel> selectedMembers = new List<PersonModel>();
 
         public CreateTeamForm()
@@ -31,6 +31,7 @@ namespace TrackerUI
             selectedMembers.Add(new PersonModel("Sam", "Smith", "xx", "xx"));
             selectedMembers.Add(new PersonModel("Same", "Strom", "xx", "xx"));
         }
+
 
         private void WireUpLists()
         {
