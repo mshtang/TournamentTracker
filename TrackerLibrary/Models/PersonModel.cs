@@ -11,7 +11,7 @@ namespace TrackerLibrary.Models
         /// <summary>
         /// First name of a person
         /// </summary>
-        public string FristName { get; set; }
+        public string FirstName { get; set; }
 
         /// <summary>
         /// Last name of a person
@@ -27,5 +27,24 @@ namespace TrackerLibrary.Models
         /// Cellphone number of a person
         /// </summary>
         public string CellphoneNumber { get; set; }
+
+        public int Id { get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
+
+        public PersonModel() { }
+        public PersonModel(string firstName, string lastName, string emailAddress, string cellphone)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            EmailAddress = emailAddress;
+            CellphoneNumber = cellphone;
+        }
     }
 }
