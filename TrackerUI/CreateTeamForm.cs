@@ -35,9 +35,11 @@ namespace TrackerUI
 
         private void WireUpLists()
         {
+            selectTeamMemberDropDown.DataSource = null;
             selectTeamMemberDropDown.DataSource = availableMembers;
             selectTeamMemberDropDown.DisplayMember = "FullName";
 
+            teamMembersListBox.DataSource = null;
             teamMembersListBox.DataSource = selectedMembers;
             teamMembersListBox.DisplayMember = "FullName";
         }
@@ -49,7 +51,10 @@ namespace TrackerUI
                 PersonModel personModel = new PersonModel(
                     firstNameValue.Text, lastNameValue.Text, 
                     emailValue.Text, cellphoneValue.Text);
-                GlobalConfig.Connection.CreatePerson(personModel);
+                personModel = GlobalConfig.Connection.CreatePerson(personModel);
+                availableMembers.Add(personModel);
+                WireUpLists();
+
                 firstNameValue.Text = "";
                 lastNameValue.Text = "";
                 emailValue.Text = "";
@@ -71,6 +76,28 @@ namespace TrackerUI
             if (firstName == "" || lastName == "" || email == "" || cellphone== "")
                 return false;
             else return true;
+        }
+
+        private void addMemberButton_Click(object sender, EventArgs e)
+        {
+            PersonModel p = (PersonModel)selectTeamMemberDropDown.SelectedItem;
+            if (p!=null)
+            {
+                availableMembers.Remove(p);
+                selectedMembers.Add(p);
+                WireUpLists(); 
+            }
+        }
+
+        private void RemoveSelectedMemberButton_Click(object sender, EventArgs e)
+        {
+            PersonModel p = (PersonModel)teamMembersListBox.SelectedItem;
+            if (p!=null)
+            {
+                availableMembers.Add(p);
+                selectedMembers.Remove(p);
+                WireUpLists(); 
+            }
         }
     }
 }
