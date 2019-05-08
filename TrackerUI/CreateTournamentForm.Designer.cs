@@ -1,6 +1,6 @@
 ﻿namespace TrackerUI
 {
-    partial class CreateTournamentFrom
+    partial class CreateTournamentForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateTournamentFrom));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateTournamentForm));
             this.headerLabel = new System.Windows.Forms.Label();
             this.tournamentNameValue = new System.Windows.Forms.TextBox();
             this.tournamentNameLabel = new System.Windows.Forms.Label();
@@ -65,6 +65,7 @@
             this.tournamentNameValue.Name = "tournamentNameValue";
             this.tournamentNameValue.Size = new System.Drawing.Size(253, 33);
             this.tournamentNameValue.TabIndex = 12;
+            this.tournamentNameValue.TextChanged += new System.EventHandler(this.tournamentNameValue_TextChanged);
             // 
             // tournamentNameLabel
             // 
@@ -114,7 +115,6 @@
             this.selectTeamLabel.Size = new System.Drawing.Size(143, 32);
             this.selectTeamLabel.TabIndex = 15;
             this.selectTeamLabel.Text = "Select Team";
-            this.selectTeamLabel.Click += new System.EventHandler(this.roundLabel_Click);
             // 
             // createNewTeamLink
             // 
@@ -220,9 +220,9 @@
             this.prizesLabel.ForeColor = System.Drawing.Color.SlateBlue;
             this.prizesLabel.Location = new System.Drawing.Point(318, 262);
             this.prizesLabel.Name = "prizesLabel";
-            this.prizesLabel.Size = new System.Drawing.Size(179, 32);
+            this.prizesLabel.Size = new System.Drawing.Size(76, 32);
             this.prizesLabel.TabIndex = 23;
-            this.prizesLabel.Text = "Teams / Players";
+            this.prizesLabel.Text = "Prizes";
             // 
             // createTournamentButton
             // 
@@ -238,7 +238,7 @@
             this.createTournamentButton.Text = "Create Tournament";
             this.createTournamentButton.UseVisualStyleBackColor = true;
             // 
-            // CreateTournamentFrom
+            // CreateTournamentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -264,9 +264,8 @@
             this.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.Name = "CreateTournamentFrom";
+            this.Name = "CreateTournamentForm";
             this.Text = "Create Tournament";
-            this.Load += new System.EventHandler(this.CreateTournamentFrom_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

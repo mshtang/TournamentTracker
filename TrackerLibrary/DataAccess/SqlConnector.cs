@@ -54,5 +54,27 @@ namespace TrackerLibrary.DataAccess
             }
             return models;
         }
+
+        public TeamModel CreateTeam(TeamModel teamModel)
+        {
+            using(IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(dbName)))
+            {
+                var p = new Dapper.DynamicParameters();
+                p.Add("@TeamName", teamModel.TeamName);
+                p.Add("@id", 0, dbType: DbType.Int32, direction: ParameterDirection.Output);
+                connection.Execute("dbo.spTeams_Insert", p, commandType: CommandType.StoredProcedure);
+                teamModel.Id = p.Get<int>("@id");
+
+                foreach (PersonModel member in teamModel.TeamMembers)
+                {
+                    var m = new Dapper.DynamicParameters();
+                    m.Add("@TeamId", teamModel.Id);
+                    m.Add("@PersonId", member.Id);
+                    connection.Execute("dbo.spTeamMembers_Insert", m, commandType: CommandType.StoredProcedure);
+                    //member.Id = m.Get<int>("@id");
+                }
+            }
+            return teamModel;
+        }
     }
 }

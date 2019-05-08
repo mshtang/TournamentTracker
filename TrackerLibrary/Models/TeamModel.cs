@@ -17,5 +17,7 @@ namespace TrackerLibrary.Models
         /// The team name
         /// </summary>
         public string TeamName { get; set; }
+
+        public int Id { get; set; }
     }
 }
