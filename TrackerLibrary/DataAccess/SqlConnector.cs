@@ -76,5 +76,39 @@ namespace TrackerLibrary.DataAccess
             }
             return teamModel;
         }
+
+        public TournamentModel CreateTour(TournamentModel tourModel)
+        {
+            using(IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(dbName)))
+            {
+                foreach (TeamModel team in tourModel.EnteredTeam)
+                {
+                    var p = new Dapper.DynamicParameters();
+                    p.Add("@TournamentId", tourModel.Id);
+                    p.Add("@TeamId", team.Id);
+                    connection.Execute("dbo.spTournaments_Insert", p, commandType: CommandType.StoredProcedure);
+                }
+            }
+            return tourModel;
+        }
+
+        public List<TeamModel> GetTeams_ALL()
+        {
+            List<TeamModel> teamModels = new List<TeamModel>();
+            using(IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(dbName)))
+            {
+                teamModels = connection.Query<TeamModel>("dbo.spTeams_GetAll").ToList();
+
+                foreach (TeamModel team in teamModels)
+                {
+                    var p = new Dapper.DynamicParameters();
+                    p.Add("@TeamId", team.Id);
+                    team.TeamMembers = connection.Query<PersonModel>(
+                        "dbo.spTeamMembers_GetByTeam", p, commandType: CommandType.StoredProcedure)
+                        .ToList();
+                }
+            }
+            return teamModels;
+        }
     }
 }
